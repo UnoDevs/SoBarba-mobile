@@ -1,4 +1,4 @@
-# sobarba_mobile
+# flutter_faculdade_v1
 
 A new Flutter project.
 
