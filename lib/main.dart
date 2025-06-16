@@ -1,35 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_faculdade_v1/ui/login/pages/login_page.dart';
-import 'package:flutter_faculdade_v1/ui/login/view_models/login_viewmodel.dart';
-import 'package:flutter_faculdade_v1/ui/scheduling/pages/scheduling_page.dart';
-import 'package:flutter_faculdade_v1/ui/scheduling/pages/schedulingcreate_page.dart';
-import 'package:flutter_faculdade_v1/ui/scheduling/view_models/scheduling_viewmodel.dart';
-import 'package:provider/provider.dart';
-
+import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+import 'package:sobarba_mobile/data/repositories/auth_repository.dart';
+import 'package:sobarba_mobile/ui/login/view_models/auth_viewmodel.dart';
 
 void main() {
-  runApp(const SoBarbaApp());
+  Get.put(AuthViewmodel(authrepository: AuthRepository()));
+  runApp(const MyApp());
 }
 
-class SoBarbaApp extends StatelessWidget {
-  const SoBarbaApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: 
-    [
-      ChangeNotifierProvider(create:(_) => LoginViewmodel()),
-      ChangeNotifierProvider(create:(_) => SchedulingViewModel())
-    ],
-    child: MaterialApp( 
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LoginView(),
-        '/scheduling': (context) => SchedulingView(),
-        '/scheduling/create': (context) => SchedulingCreateView()
-      },
-    ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
