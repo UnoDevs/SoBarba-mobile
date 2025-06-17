@@ -11,8 +11,8 @@ class SchedulingDatasource {
 
   create(Scheduling entity) async{
     final response = await _dio.post("scheduling", data: {
-    "startDate": entity.startDate,
-    "endDate": entity.endDate,
+    "startDate": entity.startDate.toIso8601String(),
+    "endDate": entity.endDate.toIso8601String(),
     "clientId": entity.clientId,
     "barberId": entity.barberId
     });
