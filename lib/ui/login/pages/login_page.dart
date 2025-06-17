@@ -16,31 +16,62 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _authViewmodel = AuthViewmodel(authrepository: AuthRepository());
-    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0024D4), Color(0xFF3366FF)],
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF0024D4), Color(0xFF3366FF)],
             begin: Alignment.topLeft,
-            end: Alignment.topRight),
+            end: Alignment.topRight,
           ),
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(flex: 2),
-          Image.asset('lib/config/assets/LogoSoBarba.png'),
-          const SizedBox(height: 32,),
-          _buildTextField(hint: 'E-mail', icon: Icons.email_outlined, onChanged: (value) => {})
-        ],
-      ),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('lib/config/assets/LogoSoBarba.png'),
+            const SizedBox(height: 32),
+            _buildTextField(
+              hint: 'E-mail',
+              icon: Icons.email_outlined,
+              onChanged: (value) => {},
+              controller: emailController
+            ),
+            const SizedBox(height: 32),
+            _buildTextField(
+              hint: 'Senha',
+              icon: Icons.lock_outline,
+              onChanged: (value) => {},
+              controller: passwordController
+            ),
+            const SizedBox(height: 32),
+            const SizedBox(height: 8),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () => {_authViewmodel.login(emailController.text, passwordController.text)},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -50,8 +81,10 @@ class _LoginPageState extends State<LoginPage> {
     required IconData icon,
     bool obscure = false,
     required Function(String) onChanged,
+    required TextEditingController controller
   }) {
     return TextField(
+      controller: controller,
       onChanged: onChanged,
       obscureText: obscure,
       style: const TextStyle(color: Colors.white),

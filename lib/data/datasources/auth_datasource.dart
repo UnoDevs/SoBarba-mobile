@@ -4,8 +4,8 @@ class AuthDatasource {
   final _dio = DioClient().dio;
 
   getToken(String email, String password) async {
-    final response = await _dio.post('auth/singin', data: {
-      'email': email,
+    final response = await _dio.post('/auth/singin', data: {
+      'username': email,
       'password': password
     });
     return response.data;

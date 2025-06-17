@@ -5,7 +5,7 @@ class AuthRepository {
   final AuthDatasource _authDatasource = new AuthDatasource();
   
   Future<String> getToken(String email, String password) async {
-    final response = _authDatasource.getToken(email, password);
-    return response['access_token'];
+    final response = await _authDatasource.getToken(email, password);
+    return response['accessToken'];
   }
 }

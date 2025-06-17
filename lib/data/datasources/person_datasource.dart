@@ -4,7 +4,7 @@ class PersonDatasource {
   final _dio = DioClient().dio;
 
   findAll() async {
-    final response = await _dio.get('person');
+    final response = await _dio.get('/person');
     return response.data;
   }
 }
