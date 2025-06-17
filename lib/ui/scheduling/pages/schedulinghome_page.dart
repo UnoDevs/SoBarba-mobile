@@ -10,6 +10,6 @@ class SchedulingHomePage extends StatefulWidget {
 class _SchedulingHomePageState extends State<SchedulingHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Placeholder();
   }
 }

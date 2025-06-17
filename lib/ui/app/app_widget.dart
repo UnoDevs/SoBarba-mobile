@@ -18,7 +18,8 @@ class SoBarbaApp extends StatelessWidget {
       home: const LoginPage(),
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
-        GetPage(name: '/home', page: () => const SchedulingHomePage())
+        GetPage(name: '/home', page: () => const SchedulingHomePage()),
+        //GetPage(name: '/create', page: () => const )
       ],
     );
   }

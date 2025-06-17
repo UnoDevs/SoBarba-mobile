@@ -49,7 +49,8 @@ class _LoginPageState extends State<LoginPage> {
               hint: 'Senha',
               icon: Icons.lock_outline,
               onChanged: (value) => {},
-              controller: passwordController
+              controller: passwordController,
+              obscure: true
             ),
             const SizedBox(height: 32),
             const SizedBox(height: 8),
