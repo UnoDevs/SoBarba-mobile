@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/instance_manager.dart';
 import 'package:sobarba_mobile/data/repositories/auth_repository.dart';
 import 'package:sobarba_mobile/ui/login/view_models/auth_viewmodel.dart';
 
@@ -58,7 +59,12 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () => {_authViewmodel.login(emailController.text, passwordController.text)},
+                onPressed: () async {
+                  await _authViewmodel.login(emailController.text, passwordController.text);
+                  if (_authViewmodel.isLoggedIn) {
+                    Get.put(_authViewmodel);
+                  }
+                  },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(

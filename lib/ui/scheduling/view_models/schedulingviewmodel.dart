@@ -33,13 +33,14 @@ class SchedulingViewModel extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Erro ao puxar pessoas!',
-        'Verifique sua conexão',
+        'Verifique sua conexão $e',
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
+      print(e);
     }
   }
 
@@ -59,6 +60,7 @@ class SchedulingViewModel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
+      print(e);
     }
   }
 

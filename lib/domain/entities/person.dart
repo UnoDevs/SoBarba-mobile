@@ -50,7 +50,7 @@ class Person {
       phone: map['phone'] as String,
       active: map['active'] as bool,
       document: map['document'] as String,
-      personTypes: List<String>.from(map['personTypes'] as List<String>),
+      personTypes: List<String>.from(map['personTypes']),
       employeeData: map['employeeData'] != null ? EmployeeData.fromMap(map['employeeData'] as Map<String,dynamic>) : null,
     );
   }

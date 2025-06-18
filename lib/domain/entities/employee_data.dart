@@ -6,7 +6,7 @@ class EmployeeData {
   final DateTime hireDate;
   final DateTime? terminationDate;
   final double salary;
-  final double comission;
+  final double commission;
   final String jobTitle;
 
   EmployeeData({
@@ -14,7 +14,7 @@ class EmployeeData {
     required this.hireDate,
     this.terminationDate,
     required this.salary,
-    required this.comission,
+    required this.commission,
     required this.jobTitle
   });
 
@@ -26,7 +26,7 @@ class EmployeeData {
       'hireDate': hireDate.millisecondsSinceEpoch,
       'terminationDate': terminationDate?.millisecondsSinceEpoch,
       'salary': salary,
-      'comission': comission,
+      'comission': commission,
       'jobTitle': jobTitle,
     };
   }
@@ -37,7 +37,7 @@ class EmployeeData {
       hireDate: DateTime.parse(map['hireDate']),
       terminationDate: map['terminationDate'] != null ? DateTime.parse(map['terminationDate']) : null,
       salary: map['salary'] as double,
-      comission: map['comission'] as double,
+      commission: map['commission'] as double,
       jobTitle: map['jobTitle'] as String,
     );
   }
