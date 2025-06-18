@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:sobarba_mobile/ui/login/pages/login_page.dart';
+import 'package:sobarba_mobile/ui/scheduling/pages/schedulingcreate_page.dart';
 import 'package:sobarba_mobile/ui/scheduling/pages/schedulinghome_page.dart';
 
 class SoBarbaApp extends StatelessWidget {
@@ -19,7 +20,7 @@ class SoBarbaApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/home', page: () => const SchedulingHomePage()),
-        //GetPage(name: '/create', page: () => const )
+        GetPage(name: '/create', page: () => const SchedulingCreatePage())
       ],
     );
   }

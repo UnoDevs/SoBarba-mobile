@@ -64,7 +64,26 @@ class SchedulingViewModel extends GetxController {
     }
   }
 
-  Future<void> createScheduling() async {}
+  Future<void> createScheduling(Scheduling scheduling) async {
+  try {
+    _isLoading.value = true;
+    await schedulingRepository.create(scheduling);
+    await findAllScheduling(); // Atualiza a lista após inserção
+    generateSchedulingItems(); // Atualiza os itens da interface
+    _isLoading.value = false;
+    Get.snackbar('Sucesso', 'Agendamento criado com sucesso!',
+      backgroundColor: Colors.green, colorText: Colors.white);
+  } catch (e) {
+    _isLoading.value = false;
+    Get.snackbar(
+      'Erro ao criar agendamento',
+      'Verifique os dados e tente novamente.\n$e',
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+    );
+    print('Erro no createScheduling: $e');
+  }
+}
 
   List<SchedulingItem> generateSchedulingItems() {
     final List<SchedulingItem> items = [];

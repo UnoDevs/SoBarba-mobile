@@ -53,7 +53,7 @@ Widget build(BuildContext context) {
       return SchedulingList(items: _viewModel.schedulingItems);
     }),
     floatingActionButton: FloatingActionButton(
-      onPressed: () => Get.toNamed('/cadastroAgendamento'),
+      onPressed: () => Get.toNamed('/create'),
       backgroundColor: const Color(0xFF0024D4),
       child: const Icon(Icons.add, color: Colors.white),
       shape: RoundedRectangleBorder(
