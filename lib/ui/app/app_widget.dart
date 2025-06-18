@@ -14,7 +14,8 @@ class SoBarbaApp extends StatelessWidget {
       title: 'SóBarba App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 71, 0, 193)),
+        scaffoldBackgroundColor: const Color(0xFFE5E9FF)
       ),
       home: const LoginPage(),
       getPages: [

@@ -50,10 +50,12 @@ Widget build(BuildContext context) {
       if (_schedulingViewModel.isLoading.value) {
         return const Center(child: CircularProgressIndicator());
       }
-      return SchedulingList(items: _schedulingViewModel.schedulingItems);
+      return SchedulingList(items: _schedulingViewModel.schedulingItems, onRefresh: _loadData);
     }),
     floatingActionButton: FloatingActionButton(
-      onPressed: () => Get.toNamed('/create'),
+      onPressed: () {
+        Get.toNamed('/create');
+      },
       backgroundColor: const Color(0xFF0024D4),
       child: const Icon(Icons.add, color: Colors.white),
       shape: RoundedRectangleBorder(

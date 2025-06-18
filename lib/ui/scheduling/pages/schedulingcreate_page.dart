@@ -43,95 +43,109 @@ class _SchedulingcreatePageState extends State<SchedulingCreatePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryBlue,
-        title: const Text('Novo Agendamento', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Novo Agendamento',
+          style: TextStyle(color: Colors.white),
+        ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFFE5E9FF),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Obx(() {
-          if (_schedulingViewModel.people.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: RefreshIndicator(
+        onRefresh: () => _loadData(),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Obx(() {
+            if (_schedulingViewModel.people.isEmpty) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          final clients = _schedulingViewModel.people
-              .where((p) => !p.personTypes.contains("EMPLOYEE"))
-              .toList();
+            final clients =
+                _schedulingViewModel.people
+                    .where((p) => !p.personTypes.contains("EMPLOYEE"))
+                    .toList();
 
-          final barbers = _schedulingViewModel.people
-              .where((p) => p.personTypes.contains("EMPLOYEE"))
-              .toList();
+            final barbers =
+                _schedulingViewModel.people
+                    .where((p) => p.personTypes.contains("EMPLOYEE"))
+                    .toList();
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildDropdown(
-                label: 'Cliente',
-                value: selectedClientId.value,
-                people: clients,
-                onChanged: (value) => selectedClientId.value = value,
-              ),
-              const SizedBox(height: 12),
-              _buildDropdown(
-                label: 'Barbeiro',
-                value: selectedBarberId.value,
-                people: barbers,
-                onChanged: (value) => selectedBarberId.value = value,
-              ),
-              const SizedBox(height: 12),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryBlue,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildDropdown(
+                  label: 'Cliente',
+                  value: selectedClientId.value,
+                  people: clients,
+                  onChanged: (value) => selectedClientId.value = value,
                 ),
-                icon: const Icon(Icons.calendar_today, color: Colors.white),
-                label: Text(
-                  startDate == null
-                      ? 'Selecionar Início'
-                      : 'Início: ${_formatDate(startDate!)}',
-                  style: const TextStyle(color: Colors.white),
+                const SizedBox(height: 12),
+                _buildDropdown(
+                  label: 'Barbeiro',
+                  value: selectedBarberId.value,
+                  people: barbers,
+                  onChanged: (value) => selectedBarberId.value = value,
                 ),
-                onPressed: () async {
-                  final picked = await _pickDateTime();
-                  if (picked != null) setState(() => startDate = picked);
-                },
-              ),
-              const SizedBox(height: 12),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryBlue,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                const SizedBox(height: 12),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryBlue,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  icon: const Icon(Icons.calendar_today, color: Colors.white),
+                  label: Text(
+                    startDate == null
+                        ? 'Selecionar Início'
+                        : 'Início: ${_formatDate(startDate!)}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    final picked = await _pickDateTime();
+                    if (picked != null) setState(() => startDate = picked);
+                  },
                 ),
-                icon: const Icon(Icons.calendar_month, color: Colors.white),
-                label: Text(
-                  endDate == null
-                      ? 'Selecionar Fim'
-                      : 'Fim: ${_formatDate(endDate!)}',
-                  style: const TextStyle(color: Colors.white),
+                const SizedBox(height: 12),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryBlue,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  icon: const Icon(Icons.calendar_month, color: Colors.white),
+                  label: Text(
+                    endDate == null
+                        ? 'Selecionar Fim'
+                        : 'Fim: ${_formatDate(endDate!)}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    final picked = await _pickDateTime();
+                    if (picked != null) setState(() => endDate = picked);
+                  },
                 ),
-                onPressed: () async {
-                  final picked = await _pickDateTime();
-                  if (picked != null) setState(() => endDate = picked);
-                },
-              ),
-              const Spacer(),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryBlue,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                const Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryBlue,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: _submit,
+                  child: const Text(
+                    'Salvar Agendamento',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
-                onPressed: _submit,
-                child: const Text(
-                  'Salvar Agendamento',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ],
-          );
-        }),
+              ],
+            );
+          }),
+        ),
       ),
     );
   }
@@ -159,12 +173,10 @@ class _SchedulingcreatePageState extends State<SchedulingCreatePage> {
         labelStyle: TextStyle(color: Colors.black),
       ),
       value: value,
-      items: people.map<DropdownMenuItem<int>>((p) {
-        return DropdownMenuItem<int>(
-          value: p.id,
-          child: Text(p.name),
-        );
-      }).toList(),
+      items:
+          people.map<DropdownMenuItem<int>>((p) {
+            return DropdownMenuItem<int>(value: p.id, child: Text(p.name));
+          }).toList(),
       onChanged: onChanged,
     );
   }
@@ -214,6 +226,6 @@ class _SchedulingcreatePageState extends State<SchedulingCreatePage> {
         endDate: endDate!,
       ),
     );
-    Get.back();
+    Get.back(result: true);
   }
 }
