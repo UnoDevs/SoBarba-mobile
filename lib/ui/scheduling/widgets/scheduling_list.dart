@@ -11,7 +11,7 @@ Widget build(BuildContext context) {
   if (items.isEmpty) {
     return const Center(
       child: Text(
-        'Nenhum agendamento encontrado.',
+        'Nenhum agendamento encontrado',
         style: TextStyle(fontSize: 16, color: Colors.grey),
       ),
     );

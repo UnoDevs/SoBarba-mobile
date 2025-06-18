@@ -40,7 +40,6 @@ class SchedulingViewModel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
-      print(e);
     }
   }
 
@@ -60,7 +59,6 @@ class SchedulingViewModel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
-      print(e);
     }
   }
 
@@ -68,8 +66,8 @@ class SchedulingViewModel extends GetxController {
   try {
     _isLoading.value = true;
     await schedulingRepository.create(scheduling);
-    await findAllScheduling(); // Atualiza a lista após inserção
-    generateSchedulingItems(); // Atualiza os itens da interface
+    await findAllScheduling(); 
+    generateSchedulingItems();
     _isLoading.value = false;
     Get.snackbar('Sucesso', 'Agendamento criado com sucesso!',
       backgroundColor: Colors.green, colorText: Colors.white);
@@ -81,7 +79,6 @@ class SchedulingViewModel extends GetxController {
       backgroundColor: Colors.red,
       colorText: Colors.white,
     );
-    print('Erro no createScheduling: $e');
   }
 }
 
