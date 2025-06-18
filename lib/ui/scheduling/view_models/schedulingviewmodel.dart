@@ -12,9 +12,9 @@ class SchedulingViewModel extends GetxController {
   final RxList<Person> _people = <Person>[].obs;
   final RxList<Scheduling> _schedulings = <Scheduling>[].obs;
   final RxList<SchedulingItem> _schedulingItems = <SchedulingItem>[].obs;
-  get people => _people;
-  get schedulings => _schedulings;
-  get schedulingItems => _schedulingItems;
+  RxList<Person> get people => _people;
+  RxList<Scheduling> get schedulings => _schedulings;
+  RxList<SchedulingItem> get schedulingItems => _schedulingItems;
 
   final RxBool _isLoading = false.obs;
   RxBool get isLoading => _isLoading;
@@ -77,7 +77,7 @@ class SchedulingViewModel extends GetxController {
     _isLoading.value = false;
     Get.snackbar(
       'Erro ao criar agendamento',
-      'Verifique os dados e tente novamente.\n$e',
+      'Verifique os dados e tente novamente.',
       backgroundColor: Colors.red,
       colorText: Colors.white,
     );

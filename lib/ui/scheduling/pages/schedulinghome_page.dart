@@ -16,12 +16,12 @@ class SchedulingHomePage extends StatefulWidget {
 }
 
 class _SchedulingHomePageState extends State<SchedulingHomePage> {
-  late final SchedulingViewModel _viewModel;
+  late final SchedulingViewModel _schedulingViewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = SchedulingViewModel(
+    _schedulingViewModel = SchedulingViewModel(
       schedulingRepository: SchedulingRepository(),
       personRepository: PersonRepository(),
     );
@@ -29,9 +29,9 @@ class _SchedulingHomePageState extends State<SchedulingHomePage> {
   }
 
   Future<void> _loadData() async {
-    await _viewModel.findAllPeople();
-    await _viewModel.findAllScheduling();
-    _viewModel.generateSchedulingItems();
+    await _schedulingViewModel.findAllPeople();
+    await _schedulingViewModel.findAllScheduling();
+    _schedulingViewModel.generateSchedulingItems();
   }
 
 @override
@@ -47,10 +47,10 @@ Widget build(BuildContext context) {
     ),
     drawer: SchedulingDrawer(onLogout: _handleLogout),
     body: Obx(() {
-      if (_viewModel.isLoading.value) {
+      if (_schedulingViewModel.isLoading.value) {
         return const Center(child: CircularProgressIndicator());
       }
-      return SchedulingList(items: _viewModel.schedulingItems);
+      return SchedulingList(items: _schedulingViewModel.schedulingItems);
     }),
     floatingActionButton: FloatingActionButton(
       onPressed: () => Get.toNamed('/create'),

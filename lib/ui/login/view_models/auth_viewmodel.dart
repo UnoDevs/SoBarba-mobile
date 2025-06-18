@@ -11,8 +11,10 @@ class AuthViewmodel extends GetxController {
 
   Future<void> login(String email, String password) async {
     try {
+      print('E-mail: ${email} | Senha: ${password}');
       final token = await authrepository.getToken(email, password);
       _token.value = token;
+      print('Token: ${token}');
       Get.offAllNamed('/home');
     } catch (e) {
       Get.snackbar(
@@ -24,6 +26,7 @@ class AuthViewmodel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
+      print(e);
     }
   }
 
