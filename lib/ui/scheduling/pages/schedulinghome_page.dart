@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
 import 'package:sobarba_mobile/data/repositories/person_repository.dart';
 import 'package:sobarba_mobile/data/repositories/scheduling_repository.dart';
 import 'package:sobarba_mobile/ui/scheduling/view_models/schedulingviewmodel.dart';
+import 'package:sobarba_mobile/ui/scheduling/widgets/scheduling_drawer.dart';
+import 'package:sobarba_mobile/ui/scheduling/widgets/scheduling_list.dart';
 
 class SchedulingHomePage extends StatefulWidget {
   const SchedulingHomePage({super.key});
@@ -29,13 +34,36 @@ class _SchedulingHomePageState extends State<SchedulingHomePage> {
     _viewModel.generateSchedulingItems();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agendamentos'),
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: const Color(0xFF0024D4),
+      title: const Text(
+        'Agendamentos',
+        style: TextStyle(color: Colors.white),
       ),
-      drawer: null,
-    );
+      iconTheme: const IconThemeData(color: Colors.white),
+    ),
+    drawer: SchedulingDrawer(onLogout: _handleLogout),
+    body: Obx(() {
+      if (_viewModel.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      return SchedulingList(items: _viewModel.schedulingItems);
+    }),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => Get.toNamed('/cadastroAgendamento'),
+      backgroundColor: const Color(0xFF0024D4),
+      child: const Icon(Icons.add, color: Colors.white),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+  );
+}
+
+  void _handleLogout() {
+    Get.offAllNamed('/login');
   }
 }
