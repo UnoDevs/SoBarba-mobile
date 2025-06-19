@@ -12,7 +12,7 @@ class DioClient {
     dio = Dio(
       BaseOptions(
         baseUrl: 'https://sobarba-back-end-production.up.railway.app',
-        connectTimeout: Duration(seconds: 30),
+        connectTimeout: Duration(seconds: 15),
         receiveTimeout: Duration(seconds: 15),
       ),
     );

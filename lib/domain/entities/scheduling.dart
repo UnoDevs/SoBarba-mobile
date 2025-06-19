@@ -23,8 +23,8 @@ class Scheduling {
       'id': id,
       'clientId': clientId,
       'barberId': barberId,
-      'startDate': startDate.millisecondsSinceEpoch,
-      'endDate': endDate.millisecondsSinceEpoch,
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
     };
   }
 

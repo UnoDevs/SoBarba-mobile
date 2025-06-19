@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// Simulação da entidade Scheduling
 class Scheduling {
   final int id;
   final int clientId;
@@ -37,7 +36,6 @@ class Scheduling {
   }
 }
 
-// Fake do datasource
 class FakeSchedulingDatasource {
   final List<Map<String, dynamic>> _data = [
     {
@@ -58,11 +56,9 @@ class FakeSchedulingDatasource {
   }
 
   Future<void> delete(int id) async {
-    // Fake delete
   }
 }
 
-// Repository usando o fake
 class SchedulingRepository {
   final FakeSchedulingDatasource _schedulingDatasource;
 

@@ -23,10 +23,10 @@ class EmployeeData {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'hireDate': hireDate.millisecondsSinceEpoch,
-      'terminationDate': terminationDate?.millisecondsSinceEpoch,
+      'hireDate': hireDate.toIso8601String(),
+      'terminationDate': terminationDate?.toIso8601String(),
       'salary': salary,
-      'comission': commission,
+      'commission': commission,
       'jobTitle': jobTitle,
     };
   }

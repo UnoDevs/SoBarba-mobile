@@ -4,7 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:get/utils.dart';
 import 'package:sobarba_mobile/data/repositories/person_repository.dart';
 import 'package:sobarba_mobile/data/repositories/scheduling_repository.dart';
-import 'package:sobarba_mobile/ui/scheduling/view_models/schedulingviewmodel.dart';
+import 'package:sobarba_mobile/ui/scheduling/view_models/scheduling_viewmodel.dart';
 import 'package:sobarba_mobile/ui/scheduling/widgets/scheduling_drawer.dart';
 import 'package:sobarba_mobile/ui/scheduling/widgets/scheduling_list.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// Simulação simplificada de um Person
 class Person {
   final int id;
   final String name;
@@ -15,7 +14,6 @@ class Person {
   }
 }
 
-// Fake do PersonDatasource
 class FakePersonDatasource {
   Future<List<Map<String, dynamic>>> findAll() async {
     return [
@@ -25,7 +23,6 @@ class FakePersonDatasource {
   }
 }
 
-// PersonRepository usando o fake datasource
 class PersonRepository {
   final FakePersonDatasource _personDatasource;
 

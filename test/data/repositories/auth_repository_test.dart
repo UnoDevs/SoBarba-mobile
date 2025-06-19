@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// Simula a estrutura do AuthDatasource
 class FakeAuthDatasource {
   Future<Map<String, dynamic>> getToken(String email, String password) async {
     if (email == 'teste@teste.com' && password == '123') {
@@ -11,7 +10,6 @@ class FakeAuthDatasource {
   }
 }
 
-// Versão testável do AuthRepository que usa um datasource injetável
 class AuthRepository {
   final FakeAuthDatasource _authDatasource;
 

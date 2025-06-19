@@ -29,7 +29,6 @@ class SchedulingViewModel extends GetxController {
       _isLoading.value = true;
       final response = await personRepository.findAll();
       _people.assignAll(response);
-      _isLoading.value = false;
     } catch (e) {
       Get.snackbar(
         'Erro ao puxar pessoas!',
@@ -40,6 +39,8 @@ class SchedulingViewModel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
+    } finally {
+      _isLoading.value = false;
     }
   }
 
@@ -48,7 +49,6 @@ class SchedulingViewModel extends GetxController {
       _isLoading.value = true;
       final response = await schedulingRepository.findAll();
       _schedulings.assignAll(response);
-      _isLoading.value = false;
     } catch (e) {
       Get.snackbar(
         'Erro ao puxar agendamentos!',
@@ -59,28 +59,30 @@ class SchedulingViewModel extends GetxController {
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(12),
       );
+    } finally {
+      _isLoading.value = false;
     }
   }
 
   Future<void> createScheduling(Scheduling scheduling) async {
-  try {
-    _isLoading.value = true;
-    await schedulingRepository.create(scheduling);
-    await findAllScheduling(); 
-    generateSchedulingItems();
-    _isLoading.value = false;
-    Get.snackbar('Sucesso', 'Agendamento criado com sucesso!',
-      backgroundColor: Colors.green, colorText: Colors.white);
-  } catch (e) {
-    _isLoading.value = false;
-    Get.snackbar(
-      'Erro ao criar agendamento',
-      'Verifique os dados e tente novamente.',
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
-    );
+    try {
+      _isLoading.value = true;
+      await schedulingRepository.create(scheduling);
+      await findAllScheduling();
+      generateSchedulingItems();
+      Get.snackbar('Sucesso', 'Agendamento criado com sucesso!',
+          backgroundColor: Colors.green, colorText: Colors.white);
+    } catch (e) {
+      Get.snackbar(
+        'Erro ao criar agendamento',
+        'Verifique os dados e tente novamente.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } finally {
+      _isLoading.value = false;
+    }
   }
-}
 
   List<SchedulingItem> generateSchedulingItems() {
     final List<SchedulingItem> items = [];

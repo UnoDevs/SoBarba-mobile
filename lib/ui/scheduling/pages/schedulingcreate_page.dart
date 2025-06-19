@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:sobarba_mobile/data/repositories/person_repository.dart';
 import 'package:sobarba_mobile/data/repositories/scheduling_repository.dart';
 import 'package:sobarba_mobile/domain/entities/scheduling.dart';
-import 'package:sobarba_mobile/ui/scheduling/view_models/schedulingviewmodel.dart';
+import 'package:sobarba_mobile/ui/scheduling/view_models/scheduling_viewmodel.dart';
 
 class SchedulingCreatePage extends StatefulWidget {
   const SchedulingCreatePage({super.key});
